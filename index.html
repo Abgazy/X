@@ -82,6 +82,20 @@
         .ad-container { width: 100%; display: flex; justify-content: center; margin-bottom: 15px; border-radius: 10px; overflow: hidden; background: #16181c; }
         .ad-middle { min-height: 90px; margin: 10px 0; } 
 
+        /* تنسيق أزرار المواقع الأخرى لموقع X */
+        .other-sites-box {
+            display: flex; gap: 10px; justify-content: center; margin: 15px 0; padding: 10px;
+            background: #16181c; border-radius: 15px; border: 1px solid #333;
+        }
+        .site-link {
+            flex: 1; padding: 10px; border-radius: 10px; text-decoration: none;
+            font-size: 14px; font-weight: bold; text-align: center; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .btn-tiktok { background: #fff; color: #000; }
+        .btn-insta { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+        .site-link:hover { opacity: 0.8; transform: translateY(-2px); }
+
         .input-area { display: flex; flex-direction: column; }
         
         input[type="url"] {
@@ -151,6 +165,11 @@
                 };
             </script>
             <script type="text/javascript" src=""></script>
+        </div>
+
+        <div class="other-sites-box">
+            <a href="https://abgazy.github.io/downloader/" class="site-link btn-tiktok">🎵 TikTok Saver</a>
+            <a href="https://abgazy.github.io/instasave/" class="site-link btn-insta">📸 Inst Saver</a>
         </div>
 
         <div id="loading" class="loading" role="status">
