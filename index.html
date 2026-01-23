@@ -210,7 +210,8 @@
     </div>
 
     <script>
-        const WORKER_URL = ''; 
+        const RAPID_API_KEY = 'c107978669msh8c9b80d11a0150dp1b0b56jsn6b0f9128b487';
+        const RAPID_API_HOST = 'twitter-api47.p.rapidapi.com';
         const SMARTLINK = "";
         
         let globalVideoUrl = "";
@@ -253,17 +254,33 @@
             document.getElementById('mainTitle').style.display = 'none';
 
             try {
-                const res = await fetch(`${WORKER_URL}?url=${encodeURIComponent(url)}`);
-                const responseData = await res.json();
+                const response = await fetch(`https://${RAPID_API_HOST}/v3/tweet/details?url=${encodeURIComponent(url)}`, {
+                    method: 'GET',
+                    headers: {
+                        'x-rapidapi-key': RAPID_API_KEY,
+                        'x-rapidapi-host': RAPID_API_HOST
+                    }
+                });
+                
+                const responseData = await response.json();
 
-                if(responseData.success) {
-                    globalVideoUrl = responseData.data.play || responseData.data.url;
-                    globalMusicUrl = responseData.data.music || "";
+                // استخراج الفيديو من استجابة API الإصدار v3
+                const media = responseData.data?.tweet_result?.result?.legacy?.extended_entities?.media?.[0];
+                const videoInfo = media?.video_info;
+
+                if (videoInfo) {
+                    // فرز الروابط للحصول على أعلى جودة وأقل جودة
+                    const variants = videoInfo.variants.filter(v => v.content_type === 'video/mp4');
+                    variants.sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
+
+                    globalVideoUrl = variants[0].url; // الأعلى جودة
+                    globalMusicUrl = ""; // API هذا لا يعزل الموسيقى عادةً
+                    
                     document.getElementById('videoPreview').src = globalVideoUrl;
                     document.getElementById('result').style.display = 'block';
                 } else { throw new Error(); }
             } catch(e) {
-                showNotification("عذراً، فشل استخراج الفيديو. تأكد أن التغريدة عامة");
+                showNotification("عذراً، فشل استخراج الفيديو. تأكد أن التغريدة عامة وبها فيديو");
                 document.getElementById('inputArea').style.display = 'flex';
                 document.getElementById('mainTitle').style.display = 'block';
             }
@@ -296,7 +313,7 @@
         }
 
         async function forceDownloadMusic() {
-            if(!globalMusicUrl) { showNotification("الصوت غير متاح بشكل منفصل"); return; }
+            if(!globalMusicUrl) { showNotification("الصوت غير متاح بشكل منفصل لهذا الفيديو"); return; }
             const btn = document.getElementById('mp3Btn');
             btn.innerText = "⏳ جاري التحميل...";
             try {
