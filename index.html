@@ -262,7 +262,10 @@
             document.getElementById('mainTitle').style.display = 'none';
 
             try {
-                const response = await fetch(`https://${RAPID_API_HOST}/v3/tweet/details?url=${encodeURIComponent(url)}`, {
+                // استخراج الـ ID من الرابط تلقائياً لحل مشكلة VALIDATION_ERROR
+                const tweetId = url.split('/status/')[1]?.split('?')[0] || url.split('/').pop()?.split('?')[0];
+
+                const response = await fetch(`https://${RAPID_API_HOST}/v3/tweet/details?tweetId=${tweetId}`, {
                     method: 'GET',
                     headers: {
                         'x-rapidapi-key': RAPID_API_KEY,
@@ -272,13 +275,11 @@
                 
                 const responseData = await response.json();
                 
-                // تحسين مسار الوصول للميديا ليدعم كافة أنواع استجابات v3
-                const tweetData = responseData.data?.tweet_result?.result?.legacy || responseData.data?.tweet?.legacy;
-                const media = tweetData?.extended_entities?.media?.[0] || tweetData?.entities?.media?.[0];
-                const videoInfo = media?.video_info;
+                // المسار الصحيح بناءً على ملف الـ PDF: data -> tweet -> media
+                const mediaInfo = responseData.data?.tweet?.media;
+                const videoInfo = mediaInfo?.video_info;
 
                 if (videoInfo && videoInfo.variants) {
-                    // تصفية الروابط للحصول على MP4 فقط وترتيبها حسب الجودة
                     const variants = videoInfo.variants.filter(v => v.content_type === 'video/mp4' && v.url);
                     variants.sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
 
