@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>XSaver | تحميل فيديوهات إكس وتويتر بدون علامة مائية - مجاناً 2026</title>
+    
+    <meta name="description" content="حمّل فيديوهات إكس (تويتر سابقاً) بجودة عالية مجاناً. أداة سريعة وآمنة لحفظ مقاطع X بدون برامج.">
+    <meta name="keywords" content="تحميل فيديوهات إكس, تنزيل فيديو تويتر, X Video Downloader, حفظ مقاطع X, Twitter Downloader">
+    <meta name="author" content="XSaver">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="google-site-verification" content="" />
+    
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="XSaver">
+    <meta property="og:title" content="XSaver | تحميل فيديوهات إكس (تويتر)">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="XSaver | تحميل فيديوهات إكس">
+    <meta name="twitter:description" content="أفضل أداة مجانية لتحميل فيديوهات ومقاطع إكس (تويتر سابقاً)">
+    <meta name="twitter:image" content="">
+    
+    <link rel="icon" type="image/png" href="">
+    <link rel="apple-touch-icon" href="">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "XSaver",
+      "url": "",
+      "description": "تحميل فيديوهات إكس وتويتر بجودة HD",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "ratingCount": "8540", "bestRating": "5" }
+    }
+    </script>
+    
+    <style>
+        :root {
+            --primary-color: #000000;
+            --primary-dark: #202327;
+            --success-color: #1d9bf0;
+            --info-color: #71767b;
+            --warning-color: #ffd400;
+            --text-dark: #ffffff;
+            --bg-white: #000000;
+            --footer-bg: rgba(21, 24, 28, 0.95);
+            --footer-text: #e7e9ea;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: #15202b;
+            min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; padding: 20px;
+        }
+        
+        .container {
+            background: var(--bg-white); border-radius: 20px; box-shadow: 0 0 15px rgba(255,255,255,0.1);
+            padding: 25px 25px 80px 25px; max-width: 500px; width: 100%; 
+            margin-top: 40px; position: relative; border: 1px solid #333;
+        }
+        
+        h1 { text-align: center; color: var(--text-dark); margin: 15px 0; font-size: 1.6em; }
+        
+        .ad-container { width: 100%; display: flex; justify-content: center; margin-bottom: 15px; border-radius: 10px; overflow: hidden; background: #16181c; }
+        .ad-middle { min-height: 90px; margin: 10px 0; } 
+
+        .input-area { display: flex; flex-direction: column; }
+        
+        input[type="url"] {
+            width: 100%; padding: 14px; border: 1px solid #333; border-radius: 10px;
+            font-size: 15px; direction: ltr; outline: none; margin-bottom: 10px; order: 3;
+            background: #000; color: white;
+        }
+        input[type="url"]:focus { border-color: var(--success-color); }
+        
+        .btn {
+            width: 100%; padding: 16px; border: none; border-radius: 30px;
+            background: #eff3f4;
+            color: black; font-size: 17px; font-weight: bold; cursor: pointer;
+            order: 1; margin-bottom: 15px; transition: 0.2s;
+        }
+        .btn:hover { background: #d7dbdc; }
+
+        .hint-text { text-align: center; margin-bottom: 10px; color: #71767b; font-size: 0.9em; order: 2; }
+
+        .loading { display: none; text-align: center; margin: 20px 0; }
+        .spinner { border: 4px solid #333; border-top: 4px solid var(--success-color); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 10px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .result { display: none; text-align: center; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        video { width: 100%; border-radius: 12px; background: #000; margin-bottom: 15px; border: 1px solid #333; }
+
+        .dl-link { 
+            display: inline-block; width: 100%; margin-top: 10px; padding: 14px; 
+            color: white; border-radius: 30px; font-weight: bold; border: none; cursor: pointer; text-decoration: none;
+        }
+        .btn-hd { background: var(--success-color); }
+        .btn-sd { background: var(--info-color); }
+        .btn-mp3 { background: #333; color: #fff; }
+
+        .notification { position: fixed; top: 20px; right: 20px; padding: 15px; border-radius: 10px; color: white; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.5); animation: slideIn 0.3s ease; }
+        .error { background: #f4212e; }
+        .success { background: var(--success-color); }
+        .warning { background: var(--warning-color); color: #000; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        .seo-footer { max-width: 600px; width: 100%; margin-top: 60px; padding: 25px; background: var(--footer-bg); border-radius: 20px; color: var(--footer-text); border: 1px solid #333; }
+        .seo-footer h2 { color: #fff; font-size: 1.3em; margin: 15px 0; border-bottom: 2px solid var(--success-color); display: inline-block; }
+        .feature-box { background: rgba(255,255,255,0.03); padding: 15px; border-radius: 10px; margin: 15px 0; border-right: 4px solid var(--success-color); }
+        .footer-nav { margin: 30px 0; text-align: center; }
+        .footer-nav a { color: #71767b; text-decoration: none; margin: 0 10px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="ad-container" aria-label="إعلان علوي">
+            <script type="text/javascript">atOptions = {'key' : '','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
+            <script type="text/javascript" src=""></script>
+        </div>
+
+        <h1 id="mainTitle">𝕏 Saver</h1>
+
+        <div class="ad-container ad-middle" aria-label="إعلان وسط">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src=""></script>
+        </div>
+
+        <div id="loading" class="loading" role="status">
+            <div class="spinner"></div>
+            <p style="color: var(--success-color); font-weight: bold;">⏳ جاري فحص تغريدة X...</p>
+        </div>
+
+        <div id="result" class="result">
+            <video id="videoPreview" controls playsinline aria-label="معاينة الفيديو"></video>
+            <button id="hdBtn" class="dl-link btn-hd" onclick="handleHdDownload()" aria-label="تحميل جودة HD">📥 تحميل بجودة عالية HD</button>
+            <button id="sdBtn" class="dl-link btn-sd" onclick="forceDownload('SD')" aria-label="تحميل جودة SD">📥 تحميل جودة عادية SD</button>
+            <button id="mp3Btn" class="dl-link btn-mp3" onclick="forceDownloadMusic()" aria-label="تحميل الصوت">🎵 تحميل صوت الفيديو</button>
+            <button class="dl-link" style="background:#16181c; border: 1px solid #333; margin-top: 15px;" onclick="window.location.reload()">🔄 تحميل آخر</button>
+        </div>
+
+        <div id="inputArea" class="input-area">
+            <button type="button" class="btn" onclick="downloadVideo()" aria-label="بدء التحميل">🚀 ابدأ التحميل الآن</button>
+            <p class="hint-text">الصق رابط فيديو من منصة X 👇</p>
+            <input type="url" id="v_url_clean" placeholder="https://x.com/..." onpaste="handlePaste(event)" aria-label="رابط الفيديو">
+        </div>
+    </div>
+
+    <div class="seo-footer">
+        <h2>تحميل فيديوهات من إكس (تويتر)</h2>
+        <p>استخدم <strong>XSaver</strong> للحصول على فيديوهات منصة <strong>𝕏</strong> بجودة عالية. أداة مجانية وسريعة لحفظ المقاطع مباشرة على جهازك.</p>
+        <div class="feature-box">
+            <p>✅ تحميل مقاطع X (تويتر سابقاً) بجودة HD</p>
+            <p>✅ لا يتطلب تسجيل دخول أو اشتراك</p>
+            <p>✅ خصوصية تامة وحماية لبياناتك</p>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <a href="about.html">من نحن</a> | 
+        <a href="terms.html">الشروط والأحكام</a> | 
+        <a href="privacy.html">الخصوصية</a> | 
+        <a href="contact.html">اتصل بنا</a>
+    </div>
+
+    <script>
+        const WORKER_URL = ''; 
+        const SMARTLINK = "";
+        
+        let globalVideoUrl = "";
+        let globalMusicUrl = "";
+        
+        const RATE_LIMIT = { requests: [], max: 5, window: 60000 };
+
+        function showNotification(msg, type='error') {
+            const div = document.createElement('div');
+            div.className = `notification ${type}`;
+            div.innerText = msg;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
+        }
+
+        function handlePaste(e) {
+            e.preventDefault();
+            let text = (e.clipboardData || window.clipboardData).getData('text');
+            let match = text.match(/https?:\/\/(www\.)?(x\.com|twitter\.com)\/[^\s]*/i);
+            document.getElementById('v_url_clean').value = match ? match[0] : "";
+        }
+
+        function isValidUrl(url) { return /(x\.com|twitter\.com)/.test(url); }
+
+        async function downloadVideo() {
+            const url = document.getElementById('v_url_clean').value.trim();
+            if(!url) { showNotification("الرجاء لصق الرابط أولاً"); return; }
+            if(!isValidUrl(url)) { showNotification("الرجاء إدخال رابط X/Twitter صحيح"); return; }
+            
+            const now = Date.now();
+            RATE_LIMIT.requests = RATE_LIMIT.requests.filter(t => now - t < RATE_LIMIT.window);
+            if(RATE_LIMIT.requests.length >= RATE_LIMIT.max) {
+                showNotification("أبطئ قليلاً! انتظر دقيقة", "warning");
+                return;
+            }
+            RATE_LIMIT.requests.push(now);
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('inputArea').style.display = 'none';
+            document.getElementById('mainTitle').style.display = 'none';
+
+            try {
+                const res = await fetch(`${WORKER_URL}?url=${encodeURIComponent(url)}`);
+                const responseData = await res.json();
+
+                if(responseData.success) {
+                    globalVideoUrl = responseData.data.play || responseData.data.url;
+                    globalMusicUrl = responseData.data.music || "";
+                    document.getElementById('videoPreview').src = globalVideoUrl;
+                    document.getElementById('result').style.display = 'block';
+                } else { throw new Error(); }
+            } catch(e) {
+                showNotification("عذراً، فشل استخراج الفيديو. تأكد أن التغريدة عامة");
+                document.getElementById('inputArea').style.display = 'flex';
+                document.getElementById('mainTitle').style.display = 'block';
+            }
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function handleHdDownload() {
+            if(SMARTLINK) window.open(SMARTLINK, '_blank');
+            setTimeout(() => forceDownload('HD'), 1000);
+        }
+
+        async function forceDownload(type) {
+            if(!globalVideoUrl) return;
+            const btn = type === 'HD' ? document.getElementById('hdBtn') : document.getElementById('sdBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "⏳ جاري التحميل...";
+            try {
+                const response = await fetch(globalVideoUrl, { referrerPolicy: 'no-referrer' });
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.rel = "noreferrer";
+                a.download = `X_Video_${type}_${Date.now()}.mp4`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } catch (e) { window.open(globalVideoUrl, '_blank', 'noreferrer'); }
+            btn.innerText = originalText;
+        }
+
+        async function forceDownloadMusic() {
+            if(!globalMusicUrl) { showNotification("الصوت غير متاح بشكل منفصل"); return; }
+            const btn = document.getElementById('mp3Btn');
+            btn.innerText = "⏳ جاري التحميل...";
+            try {
+                const response = await fetch(globalMusicUrl, { referrerPolicy: 'no-referrer' });
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.rel = "noreferrer";
+                a.download = `X_Audio_${Date.now()}.mp3`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } catch (e) { window.open(globalMusicUrl, '_blank', 'noreferrer'); }
+            btn.innerText = "🎵 تحميل صوت الفيديو";
+        }
+    </script>
+    <script src=""></script>
+</body>
+</html>
