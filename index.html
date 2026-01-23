@@ -271,20 +271,27 @@
                 });
                 
                 const responseData = await response.json();
-                const media = responseData.data?.tweet_result?.result?.legacy?.extended_entities?.media?.[0];
+                
+                // تحسين مسار الوصول للميديا ليدعم كافة أنواع استجابات v3
+                const tweetData = responseData.data?.tweet_result?.result?.legacy || responseData.data?.tweet?.legacy;
+                const media = tweetData?.extended_entities?.media?.[0] || tweetData?.entities?.media?.[0];
                 const videoInfo = media?.video_info;
 
-                if (videoInfo) {
-                    const variants = videoInfo.variants.filter(v => v.content_type === 'video/mp4');
+                if (videoInfo && videoInfo.variants) {
+                    // تصفية الروابط للحصول على MP4 فقط وترتيبها حسب الجودة
+                    const variants = videoInfo.variants.filter(v => v.content_type === 'video/mp4' && v.url);
                     variants.sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
 
-                    globalVideoUrl = variants[0].url;
-                    globalMusicUrl = "";
-                    
-                    document.getElementById('videoPreview').src = globalVideoUrl;
-                    document.getElementById('result').style.display = 'block';
-                } else { throw new Error(); }
+                    if (variants.length > 0) {
+                        globalVideoUrl = variants[0].url;
+                        globalMusicUrl = ""; 
+                        
+                        document.getElementById('videoPreview').src = globalVideoUrl;
+                        document.getElementById('result').style.display = 'block';
+                    } else { throw new Error("No MP4 found"); }
+                } else { throw new Error("No Video Info"); }
             } catch(e) {
+                console.error("Download Error:", e);
                 showNotification("عذراً، فشل استخراج الفيديو. تأكد أن التغريدة عامة وبها فيديو");
                 document.getElementById('inputArea').style.display = 'flex';
                 document.getElementById('mainTitle').style.display = 'block';
