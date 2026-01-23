@@ -148,8 +148,16 @@
 
     <div class="container">
         <div class="ad-container" aria-label="إعلان علوي">
-            <script type="text/javascript">atOptions = {'key' : '','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};</script>
-            <script type="text/javascript" src=""></script>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '962057634f3b7f168f0564619426f076',
+                    'format' : 'iframe',
+                    'height' : 50,
+                    'width' : 320,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/962057634f3b7f168f0564619426f076/invoke.js"></script>
         </div>
 
         <h1 id="mainTitle">𝕏 Saver</h1>
@@ -157,14 +165,14 @@
         <div class="ad-container ad-middle" aria-label="إعلان وسط">
             <script type="text/javascript">
                 atOptions = {
-                    'key' : '',
+                    'key' : '3730e70468903e670d8a5996057a66f0',
                     'format' : 'iframe',
                     'height' : 90,
                     'width' : 728,
                     'params' : {}
                 };
             </script>
-            <script type="text/javascript" src=""></script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/3730e70468903e670d8a5996057a66f0/invoke.js"></script>
         </div>
 
         <div class="other-sites-box">
@@ -212,7 +220,7 @@
     <script>
         const RAPID_API_KEY = 'c107978669msh8c9b80d11a0150dp1b0b56jsn6b0f9128b487';
         const RAPID_API_HOST = 'twitter-api47.p.rapidapi.com';
-        const SMARTLINK = "";
+        const SMARTLINK = "https://www.highperformanceformat.com/ndz43u094m?key=0693003058b76be880b91e7040854407";
         
         let globalVideoUrl = "";
         let globalMusicUrl = "";
@@ -263,18 +271,15 @@
                 });
                 
                 const responseData = await response.json();
-
-                // استخراج الفيديو من استجابة API الإصدار v3
                 const media = responseData.data?.tweet_result?.result?.legacy?.extended_entities?.media?.[0];
                 const videoInfo = media?.video_info;
 
                 if (videoInfo) {
-                    // فرز الروابط للحصول على أعلى جودة وأقل جودة
                     const variants = videoInfo.variants.filter(v => v.content_type === 'video/mp4');
                     variants.sort((a, b) => (b.bitrate || 0) - (a.bitrate || 0));
 
-                    globalVideoUrl = variants[0].url; // الأعلى جودة
-                    globalMusicUrl = ""; // API هذا لا يعزل الموسيقى عادةً
+                    globalVideoUrl = variants[0].url;
+                    globalMusicUrl = "";
                     
                     document.getElementById('videoPreview').src = globalVideoUrl;
                     document.getElementById('result').style.display = 'block';
@@ -331,6 +336,5 @@
             btn.innerText = "🎵 تحميل صوت الفيديو";
         }
     </script>
-    <script src=""></script>
 </body>
 </html>
