@@ -82,7 +82,6 @@
         .ad-container { width: 100%; display: flex; justify-content: center; margin-bottom: 15px; border-radius: 10px; overflow: hidden; background: #16181c; }
         .ad-middle { min-height: 90px; margin: 10px 0; } 
 
-        /* تنسيق أزرار المواقع الأخرى لموقع X */
         .other-sites-box {
             display: flex; gap: 10px; justify-content: center; margin: 15px 0; padding: 10px;
             background: #16181c; border-radius: 15px; border: 1px solid #333;
@@ -218,8 +217,8 @@
     </div>
 
     <script>
-        // رابط الـ Worker الجديد الذي سيعمل كـ Proxy لحل مشكلة الـ CORS
-        const PROXY_URL = "https://X-downloader.nasralhrby370.workers.dev";
+        // الرابط المصحح بناءً على الصورة (x صغيرة) [cite: 2026-01-22]
+        const PROXY_URL = "https://x-downloader.nasralhrby370.workers.dev";
         const SMARTLINK = "https://www.highperformanceformat.com/ndz43u094m?key=0693003058b76be880b91e7040854407";
         
         let globalVideoUrl = "";
@@ -245,9 +244,18 @@
         function isValidUrl(url) { return /(x\.com|twitter\.com)/.test(url); }
 
         async function downloadVideo() {
-            const url = document.getElementById('v_url_clean').value.trim();
-            if(!url) { showNotification("الرجاء لصق الرابط أولاً"); return; }
-            if(!isValidUrl(url)) { showNotification("الرجاء إدخال رابط X/Twitter صحيح"); return; }
+            const urlInput = document.getElementById('v_url_clean').value.trim();
+            if(!urlInput) { showNotification("الرجاء لصق الرابط أولاً"); return; }
+            
+            // استخراج الـ ID بذكاء (يقبل الرابط أو الرقم المباشر) [cite: 2026-01-20, 2026-01-22]
+            let tweetId = "";
+            if (isValidUrl(urlInput)) {
+                tweetId = urlInput.split('/status/')[1]?.split('?')[0] || urlInput.split('/').pop()?.split('?')[0];
+            } else if (/^\d+$/.test(urlInput)) {
+                tweetId = urlInput;
+            }
+
+            if(!tweetId) { showNotification("الرجاء إدخال رابط X صحيح أو ID التغريدة"); return; }
             
             const now = Date.now();
             RATE_LIMIT.requests = RATE_LIMIT.requests.filter(t => now - t < RATE_LIMIT.window);
@@ -262,10 +270,7 @@
             document.getElementById('mainTitle').style.display = 'none';
 
             try {
-                // استخراج المعرف (tweetId)
-                const tweetId = url.split('/status/')[1]?.split('?')[0] || url.split('/').pop()?.split('?')[0];
-
-                // الطلب الآن يذهب إلى الـ Worker الخاص بك بدلاً من RapidAPI مباشرة
+                // إرسال الطلب للـ Worker [cite: 2026-01-22]
                 const response = await fetch(`${PROXY_URL}?id=${tweetId}`);
                 
                 if (!response.ok) throw new Error("Worker respond error");
@@ -274,16 +279,14 @@
                 
                 if (responseData.videoUrl) {
                     globalVideoUrl = responseData.videoUrl;
-                    globalMusicUrl = ""; 
-                    
                     document.getElementById('videoPreview').src = globalVideoUrl;
                     document.getElementById('result').style.display = 'block';
                 } else { 
-                    throw new Error("No Video Url in response"); 
+                    throw new Error(responseData.error || "No Video Url"); 
                 }
             } catch(e) {
                 console.error("Download Error:", e);
-                showNotification("عذراً، فشل استخراج الفيديو. تأكد أن التغريدة عامة وبها فيديو");
+                showNotification("فشل استخراج الفيديو. تأكد أن التغريدة عامة وبها فيديو");
                 document.getElementById('inputArea').style.display = 'flex';
                 document.getElementById('mainTitle').style.display = 'block';
             }
@@ -316,21 +319,10 @@
         }
 
         async function forceDownloadMusic() {
-            if(!globalMusicUrl) { showNotification("الصوت غير متاح بشكل منفصل لهذا الفيديو"); return; }
+            if(!globalVideoUrl) { showNotification("الصوت غير متاح"); return; }
             const btn = document.getElementById('mp3Btn');
             btn.innerText = "⏳ جاري التحميل...";
-            try {
-                const response = await fetch(globalMusicUrl, { referrerPolicy: 'no-referrer' });
-                const blob = await response.blob();
-                const url = window.URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.rel = "noreferrer";
-                a.download = `X_Audio_${Date.now()}.mp3`;
-                document.body.appendChild(a);
-                a.click();
-                a.remove();
-            } catch (e) { window.open(globalMusicUrl, '_blank', 'noreferrer'); }
+            window.open(globalVideoUrl, '_blank', 'noreferrer');
             btn.innerText = "🎵 تحميل صوت الفيديو";
         }
     </script>
