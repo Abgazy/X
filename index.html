@@ -217,7 +217,6 @@
     </div>
 
     <script>
-        // الرابط المصحح بناءً على الصورة (x صغيرة) [cite: 2026-01-22]
         const PROXY_URL = "https://x-downloader.nasralhrby370.workers.dev";
         const SMARTLINK = "https://www.highperformanceformat.com/ndz43u094m?key=0693003058b76be880b91e7040854407";
         
@@ -247,7 +246,6 @@
             const urlInput = document.getElementById('v_url_clean').value.trim();
             if(!urlInput) { showNotification("الرجاء لصق الرابط أولاً"); return; }
             
-            // استخراج الـ ID بذكاء (يقبل الرابط أو الرقم المباشر) [cite: 2026-01-20, 2026-01-22]
             let tweetId = "";
             if (isValidUrl(urlInput)) {
                 tweetId = urlInput.split('/status/')[1]?.split('?')[0] || urlInput.split('/').pop()?.split('?')[0];
@@ -270,8 +268,8 @@
             document.getElementById('mainTitle').style.display = 'none';
 
             try {
-                // إرسال الطلب للـ Worker [cite: 2026-01-22]
-                const response = await fetch(`${PROXY_URL}?id=${tweetId}`);
+                const fullUrl = isValidUrl(urlInput) ? urlInput : `https://x.com/i/status/${tweetId}`;
+                const response = await fetch(`${PROXY_URL}?id=${encodeURIComponent(fullUrl)}`);
                 
                 if (!response.ok) throw new Error("Worker respond error");
 
