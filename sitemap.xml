@@ -26,17 +26,3 @@
     <priority>0.5</priority>
   </url>
 </urlset>
-``` 1
-
----
-
-### 2. ملف **robots.txt** (تعليمات الزحف):
-انسخ هذا الكود وضعه في ملف نصي وسمّه `robots.txt` واررفه في نفس المجلد:
-
-```text
-User-agent: *
-Allow: /
-Disallow: /cgi-bin/
-
-Sitemap: https://abgazy.github.io/X/sitemap.xml
-``` 
