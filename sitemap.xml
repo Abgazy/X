@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://abgazy.github.io/X/</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://abgazy.github.io/X/about.html</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://abgazy.github.io/X/terms.html</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://abgazy.github.io/X/privacy.html</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://abgazy.github.io/X/contact.html</loc>
+    <lastmod>2026-01-28</lastmod>
+    <priority>0.5</priority>
+  </url>
+</urlset>
+``` 1
+
+---
+
+### 2. ملف **robots.txt** (تعليمات الزحف):
+انسخ هذا الكود وضعه في ملف نصي وسمّه `robots.txt` واررفه في نفس المجلد:
+
+```text
+User-agent: *
+Allow: /
+Disallow: /cgi-bin/
+
+Sitemap: https://abgazy.github.io/X/sitemap.xml
+``` 
